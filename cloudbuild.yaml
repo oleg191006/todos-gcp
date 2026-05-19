@@ -1,0 +1,32 @@
+steps:
+  - name: gcr.io/cloud-builders/docker
+    args:
+      - build
+      - -t
+      - ${_REGION}-docker.pkg.dev/$PROJECT_ID/${_REPO}/todo-api:$SHORT_SHA
+      - .
+  - name: gcr.io/cloud-builders/docker
+    args:
+      - push
+      - ${_REGION}-docker.pkg.dev/$PROJECT_ID/${_REPO}/todo-api:$SHORT_SHA
+  - name: gcr.io/google.com/cloudsdktool/cloud-sdk
+    entrypoint: gcloud
+    args:
+      - run
+      - deploy
+      - todo-api
+      - --region
+      - ${_REGION}
+      - --image
+      - ${_REGION}-docker.pkg.dev/$PROJECT_ID/${_REPO}/todo-api:$SHORT_SHA
+      - --allow-unauthenticated
+      - --set-env-vars
+      - TASKS_PROJECT_ID=${PROJECT_ID},TASKS_LOCATION=${_REGION},TASKS_QUEUE=todo-reminders,TASKS_TARGET_URL=${_TASKS_TARGET_URL},TASKS_SERVICE_ACCOUNT_EMAIL=todo-tasks-invoker@${PROJECT_ID}.iam.gserviceaccount.com,TASKS_REQUIRE_HEADER=true
+      - --set-secrets
+      - TASKS_INTERNAL_TOKEN=tasks-internal-token:latest
+images:
+  - ${_REGION}-docker.pkg.dev/$PROJECT_ID/${_REPO}/todo-api:$SHORT_SHA
+substitutions:
+  _REGION: europe-central2
+  _REPO: todo-repo
+  _TASKS_TARGET_URL: https://todo-api-208059972369.europe-central2.run.app/tasks/remind
