@@ -31,7 +31,7 @@ export class FirestoreTodoService implements TodoService {
       title: input.title.trim(),
       completed: input.completed ?? false,
       createdAt: now,
-      updatedAt: now
+      updatedAt: now,
     };
     await docRef.set(todo);
     return todo;
@@ -48,7 +48,7 @@ export class FirestoreTodoService implements TodoService {
       ...current,
       title: input.title?.trim() ?? current.title,
       completed: input.completed ?? current.completed,
-      updatedAt: new Date().toISOString()
+      updatedAt: new Date().toISOString(),
     };
     await docRef.set(updated, { merge: true });
     return updated;

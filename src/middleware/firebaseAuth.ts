@@ -13,7 +13,7 @@ function ensureInitialized(): void {
 export async function firebaseAuth(
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ): Promise<void> {
   const header = req.headers.authorization;
   if (!header || !header.startsWith("Bearer ")) {

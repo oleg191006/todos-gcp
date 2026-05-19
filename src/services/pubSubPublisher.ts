@@ -13,8 +13,8 @@ export class PubSubPublisher {
     await this.topic.publishMessage({
       json: todo,
       attributes: {
-        event: "todo.created"
-      }
+        event: "todo.created",
+      },
     });
   }
 }

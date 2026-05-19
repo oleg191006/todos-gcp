@@ -43,7 +43,7 @@ const scheduler =
         queue: tasksQueue,
         targetUrl: tasksTargetUrl,
         serviceAccountEmail: tasksServiceAccount,
-        internalToken: tasksInternalToken
+        internalToken: tasksInternalToken,
       })
     : null;
 

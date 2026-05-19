@@ -32,16 +32,16 @@ export class CloudTasksScheduler {
 
   async scheduleReminder(
     payload: ReminderPayload,
-    delaySeconds: number
+    delaySeconds: number,
   ): Promise<string> {
     const parent = this.client.queuePath(
       this.projectId,
       this.location,
-      this.queue
+      this.queue,
     );
 
     const headers: Record<string, string> = {
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
     };
 
     if (this.internalToken) {
@@ -55,12 +55,12 @@ export class CloudTasksScheduler {
         headers,
         body: Buffer.from(JSON.stringify(payload)).toString("base64"),
         oidcToken: {
-          serviceAccountEmail: this.serviceAccountEmail
-        }
+          serviceAccountEmail: this.serviceAccountEmail,
+        },
       },
       scheduleTime: {
-        seconds: Math.floor(Date.now() / 1000) + delaySeconds
-      }
+        seconds: Math.floor(Date.now() / 1000) + delaySeconds,
+      },
     };
 
     const [response] = await this.client.createTask({ parent, task });

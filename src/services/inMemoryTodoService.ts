@@ -6,7 +6,7 @@ export class InMemoryTodoService implements TodoService {
 
   async list(): Promise<Todo[]> {
     return Array.from(this.items.values()).sort((a, b) =>
-      b.createdAt.localeCompare(a.createdAt)
+      b.createdAt.localeCompare(a.createdAt),
     );
   }
 
@@ -22,7 +22,7 @@ export class InMemoryTodoService implements TodoService {
       title: input.title.trim(),
       completed: input.completed ?? false,
       createdAt: now,
-      updatedAt: now
+      updatedAt: now,
     };
     this.items.set(id, todo);
     return todo;
@@ -37,7 +37,7 @@ export class InMemoryTodoService implements TodoService {
       ...current,
       title: input.title?.trim() ?? current.title,
       completed: input.completed ?? current.completed,
-      updatedAt: new Date().toISOString()
+      updatedAt: new Date().toISOString(),
     };
     this.items.set(id, updated);
     return updated;

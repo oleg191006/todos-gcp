@@ -51,8 +51,8 @@ This project can protect /todos with Firebase Auth ID tokens.
 - Call the sign-in endpoint to get idToken:
 
   curl -X POST "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=YOUR_API_KEY" \
-    -H "Content-Type: application/json" \
-    -d '{"email":"YOUR_USER_EMAIL","password":"YOUR_PASSWORD","returnSecureToken":true}'
+   -H "Content-Type: application/json" \
+   -d '{"email":"YOUR_USER_EMAIL","password":"YOUR_PASSWORD","returnSecureToken":true}'
 
 Copy the idToken value from the response.
 
@@ -209,22 +209,22 @@ We use Cloud Build to build and deploy on every push. The pipeline builds a cont
 
 Option A: ADC login (recommended)
 
-  gcloud auth application-default login
+gcloud auth application-default login
 
 Option B: Service account key
 
-  - Create a service account with Cloud Datastore User role.
-  - Download JSON key and set GOOGLE_APPLICATION_CREDENTIALS in .env.
+- Create a service account with Cloud Datastore User role.
+- Download JSON key and set GOOGLE_APPLICATION_CREDENTIALS in .env.
 
 ### 5) Deploy to Cloud Run
 
 From the project root:
 
-  gcloud config set project YOUR_PROJECT_ID
-  gcloud run deploy todo-api \
-    --source . \
-    --region YOUR_REGION \
-    --allow-unauthenticated
+gcloud config set project YOUR_PROJECT_ID
+gcloud run deploy todo-api \
+ --source . \
+ --region YOUR_REGION \
+ --allow-unauthenticated
 
 Cloud Run will build and deploy the container. It listens on port 8080.
 

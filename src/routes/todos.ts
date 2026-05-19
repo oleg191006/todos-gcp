@@ -7,7 +7,7 @@ import { CloudTasksScheduler } from "../services/cloudTasksScheduler";
 export function createTodoRouter(
   service: TodoService,
   publisher?: PubSubPublisher | null,
-  scheduler?: CloudTasksScheduler | null
+  scheduler?: CloudTasksScheduler | null,
 ): Router {
   const router = Router();
 
@@ -33,7 +33,7 @@ export function createTodoRouter(
     }
     const todo = await service.create({
       title: input.title,
-      completed: input.completed
+      completed: input.completed,
     });
     if (publisher) {
       try {
@@ -85,7 +85,7 @@ export function createTodoRouter(
     }
     const taskName = await scheduler.scheduleReminder(
       { todoId: todo.id },
-      delaySeconds
+      delaySeconds,
     );
     res.status(202).json({ taskName });
   });
