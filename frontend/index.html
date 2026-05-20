@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Todo Orbit</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&family=Space+Grotesk:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="ambient"></div>
+    <main class="shell">
+      <header class="hero">
+        <p class="eyebrow">Cloud Run + Firestore</p>
+        <h1>Todo Orbit</h1>
+        <p class="lead">
+          A compact dashboard to poke your API, add tasks, and watch the status
+          in real time.
+        </p>
+      </header>
+
+      <section class="panel">
+        <div class="panel-head">
+          <h2>New Task</h2>
+          <span class="badge" id="apiStatus">Checking API...</span>
+        </div>
+        <form id="todoForm" class="todo-form">
+          <input
+            type="text"
+            id="todoTitle"
+            placeholder="Ship a Cloud Run feature"
+            autocomplete="off"
+            required
+          />
+          <button type="submit">Create</button>
+        </form>
+      </section>
+
+      <section class="panel">
+        <div class="panel-head">
+          <h2>Tasks</h2>
+          <button class="ghost" id="refreshBtn">Refresh</button>
+        </div>
+        <ul id="todoList" class="todo-list"></ul>
+      </section>
+
+      <footer class="footer">
+        <p>API base: <span id="apiBase"></span></p>
+      </footer>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
